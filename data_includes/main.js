@@ -90,7 +90,8 @@ Template('stimuli.csv', currentrow =>
 		,
 		
 		newText('link', '<a href="' + currentrow.link + '" target="_blank">' + currentrow.link + '</a>')
-			.css(centered_justified_style)
+			.css('margin', 'auto')
+			.css('margin-bottom', '3em')
 			.print()
 		,
 		
