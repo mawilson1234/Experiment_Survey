@@ -103,6 +103,8 @@ Template('stimuli.csv', currentrow =>
 		
 		newButton('Next')
 			.center()
+			.css('font-family', 'Helvetica, sans-serif')
+			.css('font-size', '16px')
 			.print()
 			.wait()
 		,
