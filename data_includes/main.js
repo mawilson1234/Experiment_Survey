@@ -70,6 +70,9 @@ Template('stimuli.csv', currentrow => {
 			"in a new tab. <b>Leave this tab open!</b> Once you have finished participating in their experiment, " +
 			'return to this tab and click "Next" below.'
 		)
+			.css(centered_justified_style)
+			.print()
+		,
 		
 		newText('link', '<a href="' + currentrow.link + '" target="_blank">' + currentrow.name + '</a>')
 			.css(centered_justified_style)
