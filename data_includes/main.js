@@ -53,6 +53,7 @@ newTrial('name',
 					newText('You must enter your name before continuing.')
 						.css('margin', 'auto')
 						.css('margin-bottom', '3em')
+						.css('color', 'red')
 						.print()
 				)
 		)
@@ -89,6 +90,11 @@ Template('stimuli.csv', currentrow =>
 			.print()
 		,
 		
+		newVar('time')
+			.global()
+			.set(v => Date.now())
+		,
+		
 		newText('link', '<a href="' + currentrow.link + '" target="_blank">' + currentrow.link + '</a>')
 			.css('margin', 'auto')
 			.css('margin-bottom', '3em')
@@ -99,10 +105,15 @@ Template('stimuli.csv', currentrow =>
 			.center()
 			.print()
 			.wait()
+		,
+		
+		getVar('time')
+			.set(v => Date.now() - v)
 	)
 		.log('group', currentrow.group)
 		.log('link',  currentrow.link)
 		.log('name',  currentrow.name)
+		.log('time',  getVar('time'))
 )
 
 newTrial('end',
