@@ -12,7 +12,7 @@ var centered_justified_style = {
 }
 
 Sequence(
-	'demographics',
+	'name',
 	'instructions',
 	'link',
 	SendResults(),
