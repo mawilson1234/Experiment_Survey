@@ -20,11 +20,25 @@ Sequence(
 )
 
 newTrial('name',
-	newHtml('name', 'background.html')
+	newText(
+		'Thank you for participating in an online experiment for CGSC/LING 496/696!'
+	)
 		.css(centered_justified_style)
-		.inputWarning("You must provide an answer for '%name'.")
 		.print()
+	,
+	
+	newText('Please enter your name below.')
+		.css('margin', 'auto')
+		.css('margin-bottom', '3em')
+		.print()
+	,
+	
+	newTextInput('name')
+		.css('margin', 'auto')
+		.css('margin-bottom', '3em')
 		.log()
+		.lines(1)
+		.print()
 	,
 	
 	newButton('Next', 'Next')
@@ -33,17 +47,18 @@ newTrial('name',
 		.center()
 		.print()
 		.wait(
-			getHtml('name')
-				.test.complete()
+			getTextInput('name')
+				.test.text(/[^\s]+/)
 				.failure(
-					getHtml('name').warn()
+					newText('You must enter your name before continuing.')
+						.css('margin', 'auto')
+						.css('margin-bottom', '3em')
+						.print()
 				)
 		)
 ).setOption('countsForProgressBar', false)
 
 newTrial('instructions',
-	fullscreen(),
-	
 	newText(
 		`<p>On the next page, you will see a randomly chosen link for a student's/group's experiment.</p>
 		 <p><b>Make sure the link you see is not your own!</b> If it is, please close this page, and
@@ -63,8 +78,8 @@ newTrial('instructions',
 		.wait()
 ).setOption('countsForProgressBar', false)
 
-Template('stimuli.csv', currentrow => {
-	newTrial(
+Template('stimuli.csv', currentrow =>
+	newTrial('link',
 		newText('instructions',
 			"Below is a link to one of your classmates' experiments. Click on it to open their experiment " +
 			"in a new tab. <b>Leave this tab open!</b> Once you have finished participating in their experiment, " +
@@ -74,7 +89,7 @@ Template('stimuli.csv', currentrow => {
 			.print()
 		,
 		
-		newText('link', '<a href="' + currentrow.link + '" target="_blank">' + currentrow.name + '</a>')
+		newText('link', '<a href="' + currentrow.link + '" target="_blank">' + currentrow.link + '</a>')
 			.css(centered_justified_style)
 			.print()
 		,
@@ -87,13 +102,10 @@ Template('stimuli.csv', currentrow => {
 		.log('group', currentrow.group)
 		.log('link',  currentrow.link)
 		.log('name',  currentrow.name)
-})
+)
 
 newTrial('end',
-	exitFullscreen()
-	,
-	
-	newText('Thank you for recording your participation; you may now close this window. Thank you!')
+	newText('You have recorded your participation; you may now close this window. Thank you!')
 		.css(centered_justified_style)
 		.center()
 		.print()
