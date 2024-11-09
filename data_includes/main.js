@@ -82,7 +82,7 @@ newTrial('instructions',
 Template('stimuli.csv', currentrow =>
 	newTrial('link',
 		newText('instructions',
-			"Below is a link to one of your classmates' experiments. Click on it to open their experiment " +
+			"Below is a link to one of your classmate's experiments. Click on it to open their experiment " +
 			"in a new tab. <b>Leave this tab open!</b> Once you have finished participating in their experiment, " +
 			'return to this tab and click "Next" below.'
 		)
